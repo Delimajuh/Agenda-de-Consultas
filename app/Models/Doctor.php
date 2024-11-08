@@ -10,9 +10,7 @@ class Doctor extends Model
     use HasFactory;
 
     // Defina os campos que podem ser preenchidos em massa
-    protected $fillable = [
-        'name',
-    ];
+    protected $fillable = ['name', 'specialty'];
 
     // Relacionamento com Appointment
     public function appointments()

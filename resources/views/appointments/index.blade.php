@@ -19,14 +19,15 @@
                     <th>Paciente</th>
                     <th>Médico</th>
                     <th>Data e Hora</th>
+                    <th>Ações</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach($appointments as $appointment)
                     <tr>
                         <td>{{ $appointment->patient_name }}</td>
-                        <td>{{ $appointment->doctor_name }}</td>
-                        <td>{{ $appointment->appointment_date }}</td>
+                        <td>{{ $appointment->doctor->name ?? 'Médico não encontrado' }}</td> <!-- Nome do médico -->
+                        <td>{{ \Carbon\Carbon::parse($appointment->appointment_date)->format('d/m/Y H:i') }}</td>
                         <td>
                             <!-- Botão de Cancelar -->
                             <form action="{{ route('appointments.destroy', $appointment->id) }}" method="POST" style="display:inline;">

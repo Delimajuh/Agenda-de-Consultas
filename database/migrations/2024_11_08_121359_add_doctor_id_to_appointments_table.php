@@ -12,14 +12,17 @@ return new class extends Migration
     public function up()
     {
         Schema::table('appointments', function (Blueprint $table) {
-            $table->dateTime('appointment_datetime')->after('doctor_id');
+            $table->unsignedBigInteger('doctor_id');
+            $table->foreign('doctor_id')->references('id')->on('doctors')->onDelete('cascade');
         });
     }
     
     public function down()
     {
         Schema::table('appointments', function (Blueprint $table) {
-            $table->dropColumn('appointment_datetime');
+            $table->dropForeign(['doctor_id']);
+            
         });
     }
+    
 };
